@@ -2,7 +2,8 @@
   "name": "Kodi Remote",
   "description": "A simple to use remote control for Kodi.",
   "launch_path": "/index.html",
-  "version": "0.1.1",
+  "default_locale": "en",
+  "version": "0.1.2",
   "developer": {
     "name": "Fredrik Söderström",
     "email": "tirithen@gmail.com"
