@@ -2,7 +2,7 @@
   "name": "Kodi Remote",
   "description": "A simple to use remote control for Kodi.",
   "launch_path": "/index.html",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "developer": {
     "name": "Fredrik Söderström",
     "email": "tirithen@gmail.com"
@@ -16,7 +16,7 @@
   "type": "privileged",
   "permissions": {
     "systemXHR":{
-      "description": "Used to connect to your Kodi aookication."
+      "description": "Used to connect to your Kodi instance."
     }
   }
 }

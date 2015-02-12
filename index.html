@@ -16,28 +16,36 @@
 
       input, button {
         font-size: 2rem;
-      }
-
-      .center {
-        text-align: center;
-        z-index: 2;
-        position: relative;
-      }
-
-      .site-heading {
-        position: absolute;
-        color: #555;
-        z-index: 1;
-      }
-
-      .hide {
-        display: none;
+        border: none;
+        border-radius: 0.5rem;
       }
 
       button {
         min-width: 4rem;
         min-height: 4rem;
-        margin: 0.4rem
+        margin: 0.3rem;
+        padding: 0.1rem 0.2rem;
+        background: #fff;
+        color: #000;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      button::-moz-focus-inner {
+        border: none;
+      }
+
+      button:focus {
+        color: #000;
+      }
+
+      button:active {
+        background: #000;
+        color: #fff;
+      }
+
+      button[disabled] {
+        background: #333;
+        color: #555;
       }
 
       button.small {
@@ -51,15 +59,44 @@
         padding: 0.2rem;
       }
 
+      input[type="range"] {
+        background: transparent;
+        margin-top: -0.5rem;
+        margin-bottom: -1rem;
+      }
+
+      input[type="text"] {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+      }
+
+      .center {
+        text-align: center;
+        z-index: 2;
+        position: relative;
+      }
+
       label {
-        margin: 0.5rem 0;
+        position: relative;
+        top: -0.2rem;
+      }
+
+      .site-heading {
+        position: absolute;
+        color: #555;
+        z-index: 1;
+        transform: rotate(90deg);
+        top: 5rem;
+        left: -4.5rem;
+      }
+
+      .hide {
+        display: none;
       }
     </style>
-    <script src="rsvp.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
-    <!-- This code is in the public domain. Enjoy! -->
     <h1 class="site-heading">Kodi Remote</h1>
     <div class="center">
       <button type="button" id="up">▲</button>
@@ -74,16 +111,16 @@
     </div>
     <hr>
     <div class="center">
-      <button type="button" disabled class="small" id="prev">❙◀</button>
-      <button type="button" disabled class="small" id="reverse">◀◀</button>
-      <button type="button" class="small" id="playpause">❙▶</button>
-      <button type="button" disabled class="small" id="forward">▶▶</button>
-      <button type="button" disabled class="small" id="next">▶❙</button>
+      <button type="button" class="small" id="previous">❙◀</button>
+      <button type="button" class="small" id="reverse">◀◀</button>
+      <button type="button" class="small" id="playpause">❙❙/▶</button>
+      <button type="button" class="small" id="forward">▶▶</button>
+      <button type="button" class="small" id="next">▶❙</button>
     </div>
     <div class="center">
       <!--<button type="button" disabled class="small" id="power">Power</button>-->
       <button type="button" class="small" id="stop">◾</button>
-      <button type="button" class="small" id="home">⌂</button>
+      <button type="button" class="small" id="home">🏠</button>
       <button type="button" class="small" id="info">ℹ</button>
       <button type="button" class="small" id="back">↩</button>
       <p>
@@ -94,12 +131,12 @@
     <hr>
     <div class="center">
       <p>
-        <label for="text">Send text</label>
-        <input type="text" id="text">
+        <label for="text">Send text (press ↩ to send)</label>
+        <input type="text" id="text" placeholder="Enter text to send">
       </p>
       <p>
-        <label for="ip">Kodi IP/Address</label>
-        <input type="text" id="ip">
+        <label for="address">Kodi IP/Address (add :port if not port 80)</label>
+        <input type="text" id="address" placeholder="192.168.1.10:8080">
       </p>
     </div>
   </body>
