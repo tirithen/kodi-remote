@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <title>Kodi Remote</title>
+    <style>
+      html {
+        background: #000;
+      }
+
+      body {
+        font-size: 16px;
+        color: #fff;
+      }
+
+      input, button {
+        font-size: 2rem;
+      }
+
+      .center {
+        text-align: center;
+        z-index: 2;
+        position: relative;
+      }
+
+      .site-heading {
+        position: absolute;
+        color: #555;
+        z-index: 1;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      button {
+        min-width: 4rem;
+        min-height: 4rem;
+        margin: 0.4rem
+      }
+
+      button.small {
+        min-width: 2.5rem;
+        min-height: 2rem;
+      }
+
+      input {
+        width: 80%;
+        box-sizing: border-box;
+        padding: 0.2rem;
+      }
+
+      label {
+        margin: 0.5rem 0;
+      }
+    </style>
+    <script src="rsvp.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <!-- This code is in the public domain. Enjoy! -->
+    <h1 class="site-heading">Kodi Remote</h1>
+    <div class="center">
+      <button type="button" id="up">▲</button>
+    </div>
+    <div class="center">
+      <button type="button" id="left">◀</button>
+      <button type="button" id="select">OK</button>
+      <button type="button" id="right">▶</button>
+    </div>
+    <div class="center">
+      <button type="button" id="down">▼</button>
+    </div>
+    <hr>
+    <div class="center">
+      <button type="button" disabled class="small" id="prev">❙◀</button>
+      <button type="button" disabled class="small" id="reverse">◀◀</button>
+      <button type="button" class="small" id="playpause">❙▶</button>
+      <button type="button" disabled class="small" id="forward">▶▶</button>
+      <button type="button" disabled class="small" id="next">▶❙</button>
+    </div>
+    <div class="center">
+      <!--<button type="button" disabled class="small" id="power">Power</button>-->
+      <button type="button" class="small" id="stop">◾</button>
+      <button type="button" class="small" id="home">⌂</button>
+      <button type="button" class="small" id="info">ℹ</button>
+      <button type="button" class="small" id="back">↩</button>
+      <p>
+        <label for="">Volume</label>
+        <input type="range" id="volume" min="0" max="100">
+      </p>
+    </div>
+    <hr>
+    <div class="center">
+      <p>
+        <label for="text">Send text</label>
+        <input type="text" id="text">
+      </p>
+      <p>
+        <label for="ip">Kodi IP/Address</label>
+        <input type="text" id="ip">
+      </p>
+    </div>
+  </body>
+</html>

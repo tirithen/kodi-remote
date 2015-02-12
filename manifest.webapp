@@ -1,0 +1,22 @@
+{
+  "name": "Kodi Remote",
+  "description": "A simple to use remote control for Kodi.",
+  "launch_path": "/index.html",
+  "version": "0.1.0",
+  "developer": {
+    "name": "Fredrik Söderström",
+    "email": "tirithen@gmail.com"
+  },
+  "icons": {
+    "16": "/icons/icon16x16.png",
+    "48": "/icons/icon48x48.png",
+    "60": "/icons/icon60x60.png",
+    "128": "/icons/icon128x128.png"
+  },
+  "type": "privileged",
+  "permissions": {
+    "systemXHR":{
+      "description": "Used to connect to your Kodi aookication."
+    }
+  }
+}
