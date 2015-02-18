@@ -1,9 +1,12 @@
+/* global btoa, unescape */
+
 'use strict';
 
+var translate;
 var kodiBackgroundUpdates = true;
-var verifySettingsMessage = 'Please also make sure that ' +
-                            '"Allow control of Kodi via HTTP" option is turned on under ' +
-                            'System ⇒ Settings ⇒ Services ⇒ Webserver inside Kodi.';
+var verifySettingsMessage = '';
+var authentication = localStorage.getItem('authentication');
+
 var buttonsDependentOnActivePlayers = [];
 
 function ActivePlayers(ids) {
@@ -29,7 +32,19 @@ function Input(name, events, callback) {
   });
 }
 
-function _makeKodiCall(method, parameters, callback) {
+function authenticate() {
+  var username = prompt(translate('prompt_username'));
+  var password = '';
+
+  if (username) {
+    password = prompt(translate('prompt_password'));
+
+    authentication = btoa(unescape(encodeURIComponent(username + ':' + password)));
+    localStorage.setItem('authentication', authentication);
+  }
+}
+
+function makeKodiCall(method, parameters, callback) {
   // Setup data, url, and create request object
   var data = JSON.stringify({
     id: Date.now(),
@@ -45,33 +60,40 @@ function _makeKodiCall(method, parameters, callback) {
     var response = request.response;
     var status = request.status;
 
-    if (response) {
-      try {
-        response = JSON.parse(response);
-      } catch (exception) {
-        response = undefined;
-        status = exception;
+    if (status === 401 && callback instanceof Function) {
+      callback(new Error(status), request);
+    } else {
+      if (response) {
+        try {
+          response = JSON.parse(response);
+        } catch (exception) {
+          response = undefined;
+          status = exception;
+        }
       }
-    }
 
-    if (status >= 200 && status < 300) {
       if (callback instanceof Function) {
-        callback(undefined, response, request);
+        if (status >= 200 && status < 300) {
+          callback(undefined, response, request);
+        } else {
+          callback(new Error(status), request);
+        }
       }
-    } else if (callback instanceof Function) {
-        callback(new Error(status), request);
     }
   };
 
   request.onerror = function() {
     if (callback instanceof Function) {
-        callback(new Error(request.status), request);
+      callback(new Error(request.status), request);
     }
   };
 
   // Open the connection, set the headers and send the data
   request.open('POST', url, true);
   request.timeout = 10000;
+  if (authentication) {
+    request.setRequestHeader('Authorization', 'Basic ' + authentication);
+  }
   request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   request.setRequestHeader('Content-Length', data.length);
   request.setRequestHeader('Connection', 'close');
@@ -99,10 +121,10 @@ function callKodi(method, parameters, callback) {
   } else if (activePlayersToCall) { // Make one call to each player
     activePlayersToCall.forEach(function (playerId) {
       parameters[activePlayersToCallIndex] = playerId;
-      _makeKodiCall(method, parameters, callback);
+      makeKodiCall(method, parameters, callback);
     });
   } else { // Make a regular call
-    _makeKodiCall(method, parameters, callback);
+    makeKodiCall(method, parameters, callback);
   }
 }
 
@@ -111,9 +133,12 @@ function callKodiErrorHandler(error) {
   if (error) {
     clearTimeout(errorMessageTimer);
     errorMessageTimer = setTimeout(function () {
-      alert('Unable to connect to Kodi, please check that you have properly filled ' +
-            'in the address to you Kodi instance. ' + verifySettingsMessage);
-      inputs.address.element.focus();
+      if (error.message === '401') {
+        authenticate();
+      } else {
+        alert(translate('error_unable_to_connect') + ' ' + verifySettingsMessage);
+        inputs.address.element.focus();
+      }
     }, 1000);
   }
 }
@@ -164,7 +189,8 @@ window.addEventListener('blur', function () {
   clearTimeout(updateActivePlayers);
 });
 
-window.addEventListener('load', function () {
+// Start the application
+function start() {
   buttonsDependentOnActivePlayers = Array.prototype.slice.call(window.document.querySelectorAll('#' + [
     'previous',
     'reverse',
@@ -252,8 +278,18 @@ window.addEventListener('load', function () {
 
   // If no address are filled in, tell the use to do that first
   if (!inputs.address.element.value) {
-    alert('Welcome to Kodi Remote, to start using the remote please fill in ' +
-          'the address to your Kodi instance. ' + verifySettingsMessage);
+    alert(translate('welcome_instructions') + ' ' + verifySettingsMessage);
     inputs.address.element.focus();
   }
+}
+
+// Load the translator and start the application
+window.addEventListener('DOMContentLoaded', function () {
+  translate = navigator.mozL10n.get;
+
+  navigator.mozL10n.once(function () {
+    verifySettingsMessage = translate('help_enable_http_in_kodi');
+
+    start();
+  });
 });

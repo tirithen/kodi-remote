@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
-    <title>Kodi Remote</title>
+    <title data-l10n-id="app_title"></title>
     <style>
       html {
         background: #000;
@@ -11,6 +11,7 @@
 
       body {
         font-size: 16px;
+        font-family: sans-serif;
         color: #fff;
       }
 
@@ -94,16 +95,18 @@
         display: none;
       }
     </style>
-    <script src="app.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <link rel="prefetch" type="application/l10n" href="data/locales.ini">
+    <script src="js/libs/l10n.js" defer></script>
   </head>
   <body>
-    <h1 class="site-heading">Kodi Remote</h1>
+    <h1 data-l10n-id="app_title" class="site-heading"></h1>
     <div class="center">
       <button type="button" id="up">▲</button>
     </div>
     <div class="center">
       <button type="button" id="left">◀</button>
-      <button type="button" id="select">OK</button>
+      <button type="button" id="select" data-l10n-id="ok"></button>
       <button type="button" id="right">▶</button>
     </div>
     <div class="center">
@@ -124,19 +127,19 @@
       <button type="button" class="small" id="info">ℹ</button>
       <button type="button" class="small" id="back">↩</button>
       <p>
-        <label for="">Volume</label>
+        <label for="range" data-l10n-id="volume"></label>
         <input type="range" id="volume" min="0" max="100">
       </p>
     </div>
     <hr>
     <div class="center">
       <p>
-        <label for="text">Send text (press ↩ to send)</label>
-        <input type="text" id="text" placeholder="Enter text to send">
+        <label for="text" data-l10n-id="send_text_label"></label>
+        <input type="text" id="text" data-l10n-id="send_text_input">
       </p>
       <p>
-        <label for="address">Kodi IP/Address (add :port if not port 80)</label>
-        <input type="text" id="address" placeholder="192.168.1.10:8080">
+        <label for="address" data-l10n-id="address_label"></label>
+        <input type="text" id="address" data-l10n-id="address_input">
       </p>
     </div>
   </body>
