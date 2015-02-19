@@ -32,6 +32,48 @@ function Input(name, events, callback) {
   });
 }
 
+function Menu(name, callback) {
+  var self = this;
+
+  this.name = name;
+  this.buttonElement = document.querySelector('#' + name);
+  this.menuElement = document.querySelector(this.buttonElement.getAttribute('href'));
+  this.overlay = document.querySelector('#overlay');
+  this.menuItems = Array.prototype.slice.call(this.menuElement.querySelectorAll('.menu-item'));
+
+  this.buttonElement.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (!self.buttonElement.hasAttribute('disabled')) {
+      self.show();
+    }
+  });
+
+  this.overlay.addEventListener('click', function () {
+    self.close();
+  });
+
+  this.menuItems.forEach(function (menuItem) {
+    menuItem.addEventListener('click', function () {
+      callback(self, menuItem.getAttribute('data-value'));
+    });
+  });
+
+  this.overlay.addEventListener('transitionend', function () {
+    self.overlay.style.display = 'none';
+  });
+}
+
+Menu.prototype.show = function show() {
+  this.overlay.style.display = 'block';
+  this.menuElement.classList.add('show');
+  this.overlay.classList.add('show');
+};
+
+Menu.prototype.close = function close() {
+  this.menuElement.classList.remove('show');
+  this.overlay.classList.remove('show');
+};
+
 function authenticate() {
   var username = prompt(translate('prompt_username'));
   var password = '';
@@ -59,6 +101,9 @@ function makeKodiCall(method, parameters, callback) {
   request.onload = function() {
     var response = request.response;
     var status = request.status;
+
+    // Enable power menu
+    inputs.menu.buttonElement.removeAttribute('disabled');
 
     if (status === 401 && callback instanceof Function) {
       callback(new Error(status), request);
@@ -133,11 +178,13 @@ function callKodiErrorHandler(error) {
   if (error) {
     clearTimeout(errorMessageTimer);
     errorMessageTimer = setTimeout(function () {
+      // Disable power menu
+      inputs.menu.buttonElement.setAttribute('disabled', true);
+
       if (error.message === '401') {
         authenticate();
       } else {
         alert(translate('error_unable_to_connect') + ' ' + verifySettingsMessage);
-        inputs.address.element.focus();
       }
     }, 1000);
   }
@@ -148,6 +195,14 @@ function updateActivePlayers() {
   clearTimeout(updateActivePlayers);
   if (inputs.address && inputs.address.element.value) {
     callKodi('Player.GetActivePlayers', undefined, function (error, response) {
+      if (error) {
+        // Disable power menu
+        inputs.menu.buttonElement.setAttribute('disabled', true);
+      } else {
+        // Enable power menu
+        inputs.menu.buttonElement.removeAttribute('disabled');
+      }
+
       if (!error && response && Array.isArray(response.result) && response.result.length) {
         activePlayers = new ActivePlayers(response.result.map(function (result) {
           return result.playerid;
@@ -182,6 +237,7 @@ window.addEventListener('focus', function () {
   // Restart update of player ids
   updateActivePlayers();
 });
+
 window.addEventListener('blur', function () {
   kodiBackgroundUpdates = false;
 
@@ -199,6 +255,20 @@ function start() {
     'next',
     'stop'
   ].join(',#')));
+
+  // Bind menu
+  inputs.menu = new Menu('power', function (input, value) {
+    if (value === 'shutdown') {
+      callKodi('System.Shutdown', undefined, callKodiErrorHandler);
+    } else if (value === 'reboot') {
+      callKodi('System.Reboot', undefined, callKodiErrorHandler);
+    } else if (value === 'exit') {
+      callKodi('Application.Quit', undefined, callKodiErrorHandler);
+    }
+
+    input.buttonElement.setAttribute('disabled', true);
+    input.close();
+  });
 
   // Bind to all controls in the GUI
   inputs.playpause = new Input('playpause', 'click', function () {

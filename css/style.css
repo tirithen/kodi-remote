@@ -1,0 +1,197 @@
+html {
+  background: #000;
+}
+
+body {
+  font-size: 16px;
+  font-family: sans-serif;
+  color: #fff;
+}
+
+input, button {
+  font-size: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+button {
+  min-width: 4rem;
+  min-height: 4rem;
+  margin: 0.3rem;
+  padding: 0.1rem 0.2rem;
+  background: #fff;
+  color: #000;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+button::-moz-focus-inner,
+a::-moz-focus-inner {
+  border: none;
+}
+
+a:active, a:focus {
+  outline: none;
+}
+
+button:focus {
+  color: #000;
+}
+
+button:active {
+  background: #000;
+  color: #fff;
+}
+
+button[disabled] {
+  background: #333;
+  color: #555;
+}
+
+button.small {
+  min-width: 2.5rem;
+  min-height: 2rem;
+}
+
+input {
+  width: 80%;
+  box-sizing: border-box;
+  padding: 0.2rem;
+}
+
+input[type="range"] {
+  background: transparent;
+  margin-top: -0.5rem;
+  margin-bottom: -1rem;
+}
+
+input[type="text"] {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+.center {
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+label {
+  position: relative;
+  top: -0.2rem;
+}
+
+.site-heading {
+  position: absolute;
+  color: #555;
+  z-index: 1;
+  transform: rotate(90deg);
+  top: 5rem;
+  left: -4.5rem;
+}
+
+.hide {
+  display: none;
+}
+
+.power {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.7rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: transparent;
+  border: 0.4rem solid #fff;
+  display: block;
+  transition: border 0.3s ease-in-out;
+}
+
+.power:before {
+  content: ".";
+  color: transparent;
+  position: absolute;
+  top: -0.4rem;
+  right: 0.45rem;
+  background: #000;
+  width: 0.6rem;
+  height: 0.5rem;
+  z-index: 2;
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.power:after {
+  content: '.';
+  font-size: none;
+  color: transparent;
+  position: absolute;
+  top: -0.6rem;
+  right: 0.55rem;
+  background: #fff;
+  border-radius: 0.1rem;
+  width: 0.4rem;
+  height: 1.4rem;
+  z-index: 3;
+  display: block;
+  transition: background 0.3s ease-in-out;
+}
+
+.power:active:before {
+  opacity: 0;
+}
+
+.power[disabled] {
+  border-color: #333;
+}
+
+.power[disabled]:before {
+  opacity: 1;
+}
+
+.power[disabled]:after {
+  background: #333;
+}
+
+.overlay {
+  display: none;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.overlay.show {
+  opacity: 0.8;
+}
+
+.menu {
+  list-style-type: none;
+  background: #000;
+  border: 0.2rem solid #fff;
+  width: 80%;
+  z-index: 101;
+  position: fixed;
+  top: -100%;
+  right: 10%;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-sizing: border-box;
+  transition: top 0.5s ease-in-out;
+}
+
+.menu.show {
+  top: 2rem;
+}
+
+.menu-item {
+  margin: 0.2rem;
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem;
+}

@@ -4,103 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
     <title data-l10n-id="app_title"></title>
-    <style>
-      html {
-        background: #000;
-      }
-
-      body {
-        font-size: 16px;
-        font-family: sans-serif;
-        color: #fff;
-      }
-
-      input, button {
-        font-size: 2rem;
-        border: none;
-        border-radius: 0.5rem;
-      }
-
-      button {
-        min-width: 4rem;
-        min-height: 4rem;
-        margin: 0.3rem;
-        padding: 0.1rem 0.2rem;
-        background: #fff;
-        color: #000;
-        transition: background 0.3s, color 0.3s;
-      }
-
-      button::-moz-focus-inner {
-        border: none;
-      }
-
-      button:focus {
-        color: #000;
-      }
-
-      button:active {
-        background: #000;
-        color: #fff;
-      }
-
-      button[disabled] {
-        background: #333;
-        color: #555;
-      }
-
-      button.small {
-        min-width: 2.5rem;
-        min-height: 2rem;
-      }
-
-      input {
-        width: 80%;
-        box-sizing: border-box;
-        padding: 0.2rem;
-      }
-
-      input[type="range"] {
-        background: transparent;
-        margin-top: -0.5rem;
-        margin-bottom: -1rem;
-      }
-
-      input[type="text"] {
-        font-size: 1.5rem;
-        padding: 0.5rem;
-      }
-
-      .center {
-        text-align: center;
-        z-index: 2;
-        position: relative;
-      }
-
-      label {
-        position: relative;
-        top: -0.2rem;
-      }
-
-      .site-heading {
-        position: absolute;
-        color: #555;
-        z-index: 1;
-        transform: rotate(90deg);
-        top: 5rem;
-        left: -4.5rem;
-      }
-
-      .hide {
-        display: none;
-      }
-    </style>
-    <script src="js/app.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="prefetch" type="application/l10n" href="data/locales.ini">
     <script src="js/libs/l10n.js" defer></script>
+    <script src="js/app.js" defer></script>
   </head>
   <body>
     <h1 data-l10n-id="app_title" class="site-heading"></h1>
+    <a disabled href="#power-options" id="power" class="power"></a>
+    <ul id="power-options" class="menu">
+      <li><button data-l10n-id="shutdown" class="menu-item" data-value="shutdown"></button></li>
+      <li><button data-l10n-id="restart" class="menu-item" data-value="restart"></button></li>
+      <li><button data-l10n-id="exit" class="menu-item" data-value="exit"></button></li>
+    </ul>
     <div class="center">
       <button type="button" id="up">▲</button>
     </div>
@@ -121,7 +37,6 @@
       <button type="button" class="small" id="next">▶❙</button>
     </div>
     <div class="center">
-      <!--<button type="button" disabled class="small" id="power">Power</button>-->
       <button type="button" class="small" id="stop">◾</button>
       <button type="button" class="small" id="home">🏠</button>
       <button type="button" class="small" id="info">ℹ</button>
@@ -142,5 +57,6 @@
         <input type="text" id="address" data-l10n-id="address_input">
       </p>
     </div>
+    <div id="overlay" class="overlay"></div>
   </body>
 </html>

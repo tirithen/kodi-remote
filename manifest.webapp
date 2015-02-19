@@ -3,7 +3,7 @@
   "description": "A simple to use remote control for Kodi (or XBMC).",
   "launch_path": "/index.html",
   "default_locale": "en",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "orientation": "portrait",
   "developer": {
     "name": "Fredrik Söderström",
