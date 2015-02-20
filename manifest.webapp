@@ -19,11 +19,29 @@
   ],
   "type": "privileged",
   "permissions": {
-    "systemXHR":{
+    "systemXHR": {
       "description": "Used to connect to Kodi."
     }
   },
   "locales": {
+    "eo": {
+      "name": "Kodi defore",
+      "description": "Simple uzebla defora kontrolilo por Kodi (aŭ XBMC).",
+      "permissions": {
+        "systemXHR": {
+          "description": "Necesata por konekti al Kodi."
+        }
+      }
+    },
+    "it": {
+      "name": "Kodi remoto",
+      "description": "Controller remoto semplice da usare per Kodi (o XBMC).",
+      "permissions": {
+        "systemXHR": {
+          "description": "Necessario per connettersi a Kodi."
+        }
+      }
+    },
     "sv": {
       "name": "Kodi Fjärrkontroll",
       "description": "En fjärrkontroll för Kodi (eller XBMC) som är lätt att använda.",
