@@ -2,8 +2,7 @@
   "name": "Kodi Remote",
   "description": "A simple to use remote control for Kodi (or XBMC).",
   "launch_path": "/index.html",
-  "default_locale": "en",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "orientation": "portrait",
   "developer": {
     "name": "Fredrik Söderström",
@@ -23,6 +22,7 @@
       "description": "Used to connect to Kodi."
     }
   },
+  "default_locale": "en",
   "locales": {
     "eo": {
       "name": "Kodi defore",
@@ -31,6 +31,13 @@
         "systemXHR": {
           "description": "Necesata por konekti al Kodi."
         }
+      }
+    },
+    "es": {
+      "name": "Kodi Remoto",
+      "description": "Un control remoto simple de usar para Kodi (o XBMC).",
+      "permissions": {
+        "systemXHR": "Se usa para conectarse a Kodi."
       }
     },
     "it": {

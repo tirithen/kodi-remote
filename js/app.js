@@ -355,9 +355,9 @@ function start() {
 
 // Load the translator and start the application
 window.addEventListener('DOMContentLoaded', function () {
-  translate = navigator.mozL10n.get;
+  translate = document.webL10n.get;
 
-  navigator.mozL10n.once(function () {
+  document.webL10n.ready(function () {
     verifySettingsMessage = translate('help_enable_http_in_kodi');
 
     start();
