@@ -137,10 +137,6 @@ label {
   transition: background 0.3s ease-in-out;
 }
 
-.power:active:before {
-  opacity: 0;
-}
-
 .power[disabled] {
   border-color: #333;
 }
