@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
     <title data-l10n-id="app_title"></title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="resource" type="application/l10n" href="locales/locales.ini">
-    <script src="js/libs/l10n.js" defer></script>
-    <script src="js/app.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="resource" type="application/l10n" href="/locales/locales.ini">
+    <script src="/js/libs/l10n.js" defer></script>
+    <script src="/js/app.js" defer></script>
   </head>
   <body>
     <h1 data-l10n-id="app_title" class="site-heading"></h1>
@@ -18,35 +18,33 @@
       <li><button data-l10n-id="exit" class="menu-item" data-value="exit"></button></li>
     </ul>
     <div class="center">
-      <button type="button" id="up">▲</button>
+      <button type="button" id="up">▴</button>
     </div>
     <div class="center">
-      <button type="button" id="left">◀</button>
-      <button type="button" id="select" data-l10n-id="ok"></button>
-      <button type="button" id="right">▶</button>
+      <button type="button" id="left">◂</button>
+      <button type="button" id="select">⚫</button>
+      <button type="button" id="right">▸</button>
+    </div>
+    <div class="center margin-bottom">
+      <button type="button" id="down">▾</button>
     </div>
     <div class="center">
-      <button type="button" id="down">▼</button>
-    </div>
-    <hr>
-    <div class="center">
-      <button type="button" class="small" id="previous">❙◀</button>
-      <button type="button" class="small" id="reverse">◀◀</button>
-      <button type="button" class="small" id="playpause">❙❙/▶</button>
-      <button type="button" class="small" id="forward">▶▶</button>
-      <button type="button" class="small" id="next">▶❙</button>
+      <button type="button" class="small" id="previous">⏮</button>
+      <button type="button" class="small" id="reverse">⏪</button>
+      <button type="button" class="small" id="playpause">⎉ ▶</button>
+      <button type="button" class="small" id="forward">⏩</button>
+      <button type="button" class="small" id="next">⏭</button>
     </div>
     <div class="center">
-      <button type="button" class="small" id="stop">◾</button>
-      <button type="button" class="small" id="home">🏠</button>
-      <button type="button" class="small" id="info">ℹ</button>
+      <button type="button" class="small" id="stop">■</button>
+      <button type="button" class="small" id="home">⌂</button>
+      <button type="button" class="small" id="info"></button>
       <button type="button" class="small" id="back">↩</button>
       <p>
         <label for="range" data-l10n-id="volume"></label>
         <input type="range" id="volume" min="0" max="100">
       </p>
     </div>
-    <hr>
     <div class="center">
       <p>
         <label for="text" data-l10n-id="send_text_label"></label>

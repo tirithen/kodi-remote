@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'Entypo';
+  src: url('/font/entypo-excerpt.woff');
+}
+
 html {
   background: #000;
+  overflow-x: hidden;
 }
 
 body {
@@ -22,6 +28,7 @@ button {
   background: #fff;
   color: #000;
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  font-family: 'Entypo';
 }
 
 button::-moz-focus-inner,
@@ -38,7 +45,7 @@ button:focus {
 }
 
 button:active {
-  background: #000;
+  background: rgba(0, 0, 0, 0);
   color: #fff;
 }
 
@@ -48,20 +55,21 @@ button[disabled] {
 }
 
 button.small {
-  min-width: 2.5rem;
-  min-height: 2rem;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
 }
 
 input {
-  width: 80%;
+  width: 95%;
   box-sizing: border-box;
-  padding: 0.2rem;
+  padding: 0.1rem;
 }
 
 input[type="range"] {
   background: transparent;
   margin-top: -0.5rem;
   margin-bottom: -1rem;
+  margin: -0.5rem 0 -1rem;
 }
 
 input[type="text"] {
@@ -78,6 +86,10 @@ input[type="text"] {
 label {
   position: relative;
   top: -0.2rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
 }
 
 .site-heading {
