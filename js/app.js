@@ -307,8 +307,8 @@ function start() {
     callKodi('Input.Back', undefined, callKodiErrorHandler);
   });
 
-  inputs.info = new Input('info', 'click', function () {
-    callKodi('Input.Info', undefined, callKodiErrorHandler);
+  inputs.info = new Input('player', 'click', function () {
+    callKodi('Input.ShowOSD', undefined, callKodiErrorHandler);
   });
 
   inputs.select = new Input('select', 'click', function () {
