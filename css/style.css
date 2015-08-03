@@ -23,7 +23,7 @@ input, button {
 button {
   min-width: 4rem;
   min-height: 4rem;
-  margin: 0.3rem;
+  margin: 0.45rem 0.3rem;
   padding: 0.1rem 0.2rem;
   background: #fff;
   color: #000;
@@ -55,8 +55,8 @@ button[disabled] {
 }
 
 button.small {
-  min-width: 3.5rem;
-  min-height: 3.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
 }
 
 input {
