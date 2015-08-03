@@ -57,7 +57,11 @@
       }
     },
     "fr": {
-      "name": "Kodi Remote"
+      "name": "Kodi Remote",
+      "description": "Une télécommande simple à utiliser pour Kodi (ou XBMC).",
+      "permissions": {
+        "systemXHR": "Utilisé pour se connecter à Kodi."
+      }
     }
   }
 }
